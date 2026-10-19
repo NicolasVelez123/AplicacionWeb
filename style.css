@@ -1,0 +1,443 @@
+/* ==========================================================
+   NixFix — style.css
+   Enfoque mobile first: los estilos base son para móvil y las
+   media queries (min-width) añaden mejoras en pantallas grandes.
+   ========================================================== */
+
+/* ---------- 1. VARIABLES ---------- */
+:root {
+  /* Colores */
+  --color-bg: #faf8f5;
+  --color-surface: #ffffff;
+  --color-text: #1b2430;
+  --color-text-muted: #4a5568;
+  --color-dark: #0f1b2d;
+  --color-on-dark: #ffffff;
+  --color-primary: #0b5fff;
+  --color-primary-hover: #e39939;
+  --color-accent: #e39939;
+  --color-border: #c9d1dc;
+  --color-field-border: #6b7280;
+  --color-focus: #e39939;
+  --color-focus-on-dark: #ffd166;
+  --color-error: #b00020;
+  --color-success: #0a6b3d;
+
+  /* Tipografía */
+  --font-base: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+
+  /* Espaciado */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 3rem;
+  --space-xl: 5rem;
+
+  /* Otros */
+  --radius: 0.5rem;
+  --container: 70rem;
+  /* Margen lateral: mínimo 1rem; en pantallas anchas centra el contenido */
+  --gutter: max(var(--space-sm), calc((100% - var(--container)) / 2));
+}
+
+/* ---------- 2. BASE ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-base);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+}
+
+/* Imágenes fluidas: nunca más anchas que su contenedor */
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0 0 var(--space-sm);
+  line-height: 1.2;
+}
+
+h1 { font-size: clamp(2rem, 7vw, 3.25rem); }
+h2 { font-size: clamp(1.5rem, 4vw, 2.25rem); }
+h3 { font-size: 1.25rem; }
+
+p {
+  margin: 0 0 var(--space-sm);
+}
+
+a {
+  color: var(--color-primary);
+}
+
+/* ---------- 3. ACCESIBILIDAD: FOCO Y ENLACE DE SALTO ---------- */
+:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+/* Sobre fondos oscuros el azul pierde contraste: usamos amarillo */
+.site-header :focus-visible,
+#inicio :focus-visible,
+footer :focus-visible {
+  outline-color: var(--color-focus-on-dark);
+}
+
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: var(--space-xs) var(--space-sm);
+  background-color: var(--color-focus-on-dark);
+  color: var(--color-dark);
+  font-weight: 700;
+  transform: translateY(-100%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.skip-link:focus-visible {
+  outline-color: var(--color-dark);
+}
+
+/* ---------- 4. ENCABEZADO Y NAVEGACIÓN ---------- */
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-xs);
+  padding: var(--space-sm) var(--gutter);
+  background-color: var(--color-dark);
+  color: var(--color-on-dark);
+}
+
+.logo {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+/* Botón del menú: solo existe si hay JavaScript (clase .js en <html>) */
+.menu-toggle {
+  display: none;
+  align-items: center;
+  gap: var(--space-xs);
+  min-height: 2.75rem;
+  padding: 0 var(--space-sm);
+  border: 2px solid var(--color-on-dark);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--color-on-dark);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.js .menu-toggle {
+  display: inline-flex;
+}
+
+/* Icono de hamburguesa dibujado solo con CSS */
+.menu-toggle__icon,
+.menu-toggle__icon::before,
+.menu-toggle__icon::after {
+  display: block;
+  width: 1.25rem;
+  height: 2px;
+  background-color: currentColor;
+}
+
+.menu-toggle__icon {
+  position: relative;
+}
+
+.menu-toggle__icon::before,
+.menu-toggle__icon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+.menu-toggle__icon::before { top: -6px; }
+.menu-toggle__icon::after { top: 6px; }
+
+/* El menú ocupa su propia fila; con JS arranca cerrado en móvil */
+.site-header nav {
+  flex-basis: 100%;
+}
+
+.js .site-header nav {
+  display: none;
+}
+
+.js .site-header nav.is-open {
+  display: block;
+}
+
+.site-header nav ul {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-header nav a {
+  display: block;
+  padding: 0.75rem 0;
+  color: var(--color-on-dark);
+  text-decoration: none;
+}
+
+.site-header nav a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- 5. SECCIONES ---------- */
+main > section {
+  padding: var(--space-lg) var(--gutter);
+}
+
+/* Inicio (hero) */
+#inicio {
+  padding-block: var(--space-xl);
+  background-color: var(--color-dark);
+  color: var(--color-on-dark);
+}
+
+#inicio p {
+  max-width: 40rem;
+  font-size: 1.125rem;
+}
+
+#inicio a {
+  display: inline-block;
+  margin-top: var(--space-xs);
+  padding: 0.875rem 1.5rem;
+  border-radius: var(--radius);
+  background-color: var(--color-accent);
+  color: var(--color-dark);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+#inicio a:hover {
+  text-decoration: underline;
+}
+
+/* Tarjetas (servicios y pasos) */
+#servicios article,
+#proceso li {
+  padding: var(--space-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background-color: var(--color-surface);
+}
+
+#servicios article p,
+#proceso li p {
+  margin-bottom: 0;
+  color: var(--color-text-muted);
+}
+
+/* Servicios: Grid (diseño en dos dimensiones) */
+#servicios {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+#servicios h2 {
+  grid-column: 1 / -1;
+  margin-bottom: 0;
+}
+
+/* Proceso */
+#proceso {
+  background-color: var(--color-surface);
+}
+
+#proceso h2 {
+  margin-bottom: var(--space-md);
+}
+
+#proceso ol {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: paso;
+}
+
+#proceso li {
+  counter-increment: paso;
+  background-color: var(--color-bg);
+}
+
+#proceso li h3::before {
+  content: counter(paso);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  margin-right: var(--space-xs);
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  color: var(--color-on-dark);
+  font-size: 1rem;
+}
+
+/* ---------- 6. FORMULARIO ---------- */
+form {
+  display: grid;
+  gap: var(--space-md);
+  max-width: 36rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid var(--color-field-border);
+  border-radius: var(--radius);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  font: inherit; /* 1rem: evita el zoom automático en iPhone */
+}
+
+textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+button[type="submit"] {
+  justify-self: start;
+  min-height: 2.75rem;
+  padding: 0.75rem 1.5rem;
+  border: 0;
+  border-radius: var(--radius);
+  background-color: var(--color-primary);
+  color: var(--color-on-dark);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: var(--color-primary-hover);
+}
+
+/* Mensajes de validación */
+.field-error {
+  margin: 0.35rem 0 0;
+  color: var(--color-error);
+  font-weight: 600;
+}
+
+input[aria-invalid="true"],
+select[aria-invalid="true"],
+textarea[aria-invalid="true"] {
+  border-color: var(--color-error);
+}
+
+.form-status {
+  margin: 0;
+  font-weight: 600;
+}
+
+.form-status[data-tipo="error"] { color: var(--color-error); }
+.form-status[data-tipo="exito"] { color: var(--color-success); }
+
+/* ---------- 7. PIE DE PÁGINA ---------- */
+footer {
+  padding: var(--space-md) var(--gutter);
+  background-color: var(--color-dark);
+  color: var(--color-on-dark);
+  text-align: center;
+}
+
+footer p {
+  margin: 0;
+}
+
+/* ---------- 8. MEDIA QUERIES (de menor a mayor) ---------- */
+
+/* Tablet: a partir de 40em (≈ 640px) */
+@media (min-width: 40em) {
+  /* Caben logo y menú en una fila: el botón ya no hace falta */
+  .js .menu-toggle {
+    display: none;
+  }
+
+  .js .site-header nav {
+    display: block;
+  }
+
+  .site-header nav {
+    flex-basis: auto;
+  }
+
+  .site-header nav ul {
+    flex-direction: row;
+    gap: var(--space-md);
+  }
+
+  .site-header nav a {
+    padding: var(--space-xs) 0;
+  }
+
+  #servicios,
+  #proceso ol {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Escritorio: a partir de 64em (≈ 1024px) */
+@media (min-width: 64em) {
+  main > section {
+    padding-block: var(--space-xl);
+  }
+
+  #inicio {
+    padding-block: 7rem;
+  }
+
+  #servicios,
+  #proceso ol {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

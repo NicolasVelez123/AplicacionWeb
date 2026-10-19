@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NixFix: taller de reparación de computadoras. Diagnóstico, mantenimiento y recuperación de datos.">
+  <title>NixFix | Reparación de computadoras</title>
+  <link rel="stylesheet" href="style.css">
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <header class="site-header">
+    <p class="logo">NixFix</p>
+
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu-principal">
+      <span class="menu-toggle__icon" aria-hidden="true"></span>
+      Menú
+    </button>
+
+    <nav id="menu-principal" aria-label="Navegación principal">
+      <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#proceso">Cómo trabajamos</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="contenido">
+
+    <section id="inicio" aria-labelledby="titulo-inicio">
+      <h1 id="titulo-inicio">NixFix: tu computadora, como nueva</h1>
+      <p>Taller de reparación de laptops y PCs de escritorio. Diagnóstico claro, precio acordado antes de empezar.</p>
+      <a href="#contacto">Solicitar diagnóstico</a>
+    </section>
+
+    <section id="servicios" aria-labelledby="titulo-servicios">
+      <h2 id="titulo-servicios">Nuestros servicios</h2>
+
+      <article>
+        <h3>Reparación de laptops</h3>
+        <p>Pantallas, teclados, baterías y puertos de carga.</p>
+      </article>
+
+      <article>
+        <h3>PCs de escritorio</h3>
+        <p>Diagnóstico de fallas, cambio de componentes y ensamblaje.</p>
+      </article>
+
+      <article>
+        <h3>Mantenimiento preventivo</h3>
+        <p>Limpieza interna, cambio de pasta térmica y optimización del sistema.</p>
+      </article>
+
+      <article>
+        <h3>Recuperación de datos</h3>
+        <p>Rescate de archivos de discos dañados o formateados.</p>
+      </article>
+    </section>
+
+    <section id="proceso" aria-labelledby="titulo-proceso">
+      <h2 id="titulo-proceso">Cómo trabajamos</h2>
+      <ol role="list">
+        <li>
+          <h3>Diagnóstico</h3>
+          <p>Revisamos tu equipo e identificamos la falla.</p>
+        </li>
+        <li>
+          <h3>Presupuesto</h3>
+          <p>Te explicamos el problema y el costo antes de reparar.</p>
+        </li>
+        <li>
+          <h3>Reparación</h3>
+          <p>Trabajamos con repuestos de calidad y probamos el equipo.</p>
+        </li>
+        <li>
+          <h3>Entrega</h3>
+          <p>Recibes tu equipo funcionando y con garantía.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="contacto" aria-labelledby="titulo-contacto">
+      <h2 id="titulo-contacto">Solicita tu diagnóstico</h2>
+
+      <form action="#" method="post" novalidate>
+        <div>
+          <label for="nombre">Nombre completo</label>
+          <input type="text" id="nombre" name="nombre" autocomplete="name" required>
+          <p class="field-error" id="nombre-error" hidden></p>
+        </div>
+
+        <div>
+          <label for="correo">Correo electrónico</label>
+          <input type="email" id="correo" name="correo" autocomplete="email" required>
+          <p class="field-error" id="correo-error" hidden></p>
+        </div>
+
+        <div>
+          <label for="equipo">Tipo de equipo</label>
+          <select id="equipo" name="equipo" required>
+            <option value="">Selecciona una opción</option>
+            <option value="laptop">Laptop</option>
+            <option value="escritorio">PC de escritorio</option>
+            <option value="otro">Otro</option>
+          </select>
+          <p class="field-error" id="equipo-error" hidden></p>
+        </div>
+
+        <div>
+          <label for="problema">Describe el problema</label>
+          <textarea id="problema" name="problema" rows="5" required></textarea>
+          <p class="field-error" id="problema-error" hidden></p>
+        </div>
+
+        <button type="submit">Enviar solicitud</button>
+        <p class="form-status" id="form-status" role="status"></p>
+      </form>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 NixFix. Nicolas Mateo Vélez Álvarez.</p>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
