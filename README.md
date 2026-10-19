@@ -1,0 +1,7 @@
+NixFix
+
+NixFix es un sitio web promocional de una sola página para un taller de reparación de computadoras, desarrollado por Nicolás Vélez Álvarez como proyecto de Aplicaciones Web en la Universidad Politécnica Salesiana. Tiene cuatro secciones (Inicio, Servicios, Cómo trabajamos y Contacto) y un formulario para solicitar un diagnóstico.
+
+Está hecho con HTML5 semántico, CSS con enfoque mobile first (variables, Flexbox, Grid y dos media queries) y JavaScript puro, sin librerías ni dependencias. Incluye dos interacciones: un menú adaptable para móvil y una validación accesible del formulario, con mensajes de error enlazados a cada campo y navegación completa por teclado.
+
+Para verlo no hace falta instalar nada: basta con descargar o clonar el repositorio y abrir index.html en el navegador.
